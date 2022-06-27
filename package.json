@@ -2,10 +2,10 @@
   "name": "mongoose",
   "version": "1.0.0",
   "description": "",
-  "main": "src/app/index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node-dev src/app/index.js"
+    "start": "node-dev src/index.js"
   },
   "keywords": [],
   "author": "",
