@@ -1,21 +1,18 @@
 import express from "express";
-const app = express();
-const homeRoute = express.Router();
-const userRoute = express.Router();
-const port = 3009;
+import {fileURLToPath} from 'url';
+import {dirname, join} from 'path';
 
-//Routing
-//	Home
-homeRoute.get('/home', (req, res) => {
-	res.redirect('/user')
-})
-//	Users
-userRoute.get('/user', (req, res) => {
-	res.send('Hello user')
-})
-// Routes
-app.use('/', homeRoute)
-app.use('/', userRoute)
+import loginRoutes from './login.js';
+
+const app = express();
+const port = 3009;
+//Static
+const __dirname = dirname(fileURLToPath(import.meta.url))
+app.use(express.static(join(__dirname, 'public/')))
+//Middleware
+app.use(express.json());
+// Routing
+app.use('/', loginRoutes)
 //Server
 app.listen(port, (req, res) => {
 		console.info(`Listening on port ${port}`)
