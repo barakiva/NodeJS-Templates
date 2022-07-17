@@ -14,7 +14,12 @@ loginRoute.get('/user', (req, res) => {
 	res.send('Hello user')
 })
 loginRoute.post('/authenticate ', (req, res) => {
-	console.log('Authenticated')
-	res.send('Authenticated')
+	const user = {
+		username: req.body.username,
+		password: req.body.password
+	}
+	res
+		.status(200)
+		.body(user)
 })
 export default loginRoute;
