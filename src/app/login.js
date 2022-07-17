@@ -7,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 //	Home
 const loginRoute = express.Router();
 loginRoute.get('/login', (req, res) => {
-	res.sendFile(__dirname, 'login.html')
+	res.sendFile('login.html', {root: __dirname + '/public/'})
 })
 //	Users
 loginRoute.get('/user', (req, res) => {
