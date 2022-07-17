@@ -1,9 +1,6 @@
 import net from 'net';
-
-
-
 const helper = {
-	findFreePort: function() {
+	findFreePort: new Promise((resolve, reject)=> {
 		//Server configuration
 		const server = net.createServer();
 		const port = 3000;
@@ -15,17 +12,10 @@ const helper = {
 			}
 		})
 		server.once('listening', function() {
-			console.log('POrt is listening on port ' + port)
 			server.close();
-			// TODO the server.once function is being added to the server object. Therefore, it cannot return anything to the function which calls findFreePort because it's not bound to it's lexical context.
-			// TODO another problem is that helper.findFreePort is being called synchronously, while server.once is an async listener, so by the time it produces a value 'undefined' has already been returned to the caller of helper.findFreePort.
-			return port;
+			resolve(port);
 		})
-		//Loop
-		server.listen(port, ()=> {
-			console.log('Server bound!')
-		});
-	}
-	
+		server.listen(port, ()=> {});
+	})
 }
 export default helper;
