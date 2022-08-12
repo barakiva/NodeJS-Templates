@@ -1,9 +1,8 @@
 import express from "express";
-
 import helper from "./helper.js";
-
 import {pickApple, pickPear, farmer, season} from './orchard.js'
 import wheatField from './field.js'
+import _ from 'lodash'
 
 const app = express();
 let port;
@@ -17,34 +16,30 @@ app.listen(port, (req, res) => {
     console.info(`Listening on port ${port}`)
 })
 
-// console.log(pickApple(), pickPear(), farmer, season)
-
-
-var person = {
-	firstName: 'John',
-	lastName: 'Smith',
-	thirdName: 'plumbus',
-	getFullName: function() {
-		return this.firstName + this.lastName;
-	}
+function Person(firstname, lastname) {
+	this.firstname = firstname
+	this.lastname = lastname
 }
-var son = {
-	firstName: 'morty',
-	lastName: 'sanchez'
-}
-var granddaughter = {
-	firstName: "jessica",
-	lastName: "junior"
-}
-console.dir(person.getFullName())
-son.__proto__ = person;
-console.dir(son.thirdName) // Looks up property in son > go down in the prototype chain > 
 
-var a = {}
-var b = function() {}
-var c = []
 
-// a.__proto__.toString()
-// console.dir(Object.keys(
-// 	Object.getPrototypeOf(a)
-// ))
+// console.log(Array.__proto__.__proto__)
+// console.log(Array.prototype.__proto__)
+// console.log(Object.getPrototypeOf(Array.prototype))
+
+function Point(x, y) {
+    this.x = x;
+    this.y = y;
+}
+var myPoint = new Point();
+// the following are all true
+myPoint.__proto__ == Point.prototype
+myPoint.__proto__.__proto__ == Object.prototype
+console.log(myPoint instanceof Point);
+console.log(myPoint instanceof Object);
+console.log(myPoint.__proto__ instanceof Object)
+
+// var res = _.isEqual(new Person('steve', "jobs"), new Person('steve', 'jobs'))
+var myProto = Array.__proto__
+var myPrototype = Array.prototype
+var res = _.isEqual(myProto, myPrototype)
+console.log(res)

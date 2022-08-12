@@ -1,3 +1,7 @@
+var a = {} // Object
+var b = function() {} // Function Empty (), which is also an Object
+var c = [] // Array, which is also an Object
+
 //Everything is an object (at the bottom)
 console.log("Object {} is %s", 
 	{}.__proto__)
