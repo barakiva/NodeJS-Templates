@@ -18,6 +18,7 @@ loginRoute.post('/authenticate', (req, res) => {
 		username: req.body.username,
 		password: req.body.password
 	}
+	console.log(user)
 	res
 		.status(200)
 		.send(user)
