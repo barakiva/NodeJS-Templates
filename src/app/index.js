@@ -1,42 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
-import Blog from "./blog.js"
+import blogRoutes from "./blog-endpoints.js"
 
 const app = express();
 const port = 3001;
 
 // Middleware
 app.use(express.json())
-function addBlog(req, res, next) {
-	const blog = new Blog({ 
-		title: req.body.title,
-		snippet: req.body.snippet,
-		body: req.body.body
-	});
-	blog.save()
-		.then((data) => {
-			res.send(data)
-		})
-		.catch((err) => {
-			console.error(err)
-		})
-}
-function getAllBlogs (req, res) {
-	Blog.find()
-		.then((data) => {
-			res.send(data)
-		})
-}
-function getBlogById(req, res) {
-	Blog.findById(req.params.id)
-		.then((data) => {
-			res.send(data)
-		})
-}
-// Express routes
-app.post('/add-blog', addBlog)
-app.get('/all-blogs', getAllBlogs)
-app.get('/single-blog/:id', getBlogById )
+app.use(blogRoutes)
 // Database
 mongoose
 	.connect('mongodb://localhost:27017/test')
