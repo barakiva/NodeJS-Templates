@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 
 // Schemas
 const kittySchema = new mongoose.Schema({
-	name: String
+	name: String // shorthand for type: Type, name: name
 })
 const Kitten = mongoose.model('Kitten', kittySchema)
 const silence = new Kitten({ name: 'Silence' });
