@@ -1,5 +1,5 @@
 import express from 'express'
-import Blog from "./blog.js"
+import Blog from "../schemas/blog.js"
 
 const router = express.Router();
 // Middleware functions
