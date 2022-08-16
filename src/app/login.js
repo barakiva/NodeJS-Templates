@@ -9,7 +9,6 @@ passport.use(CredentialStrategy)
 const loginRoute = express.Router();
 loginRoute.post('/login', 
 	passport.authenticate('local', { failureRedirect: '/login.html' }),(req, res) => {
-		console.log(req.body)
 		res
 			.status(200)
 			.set({

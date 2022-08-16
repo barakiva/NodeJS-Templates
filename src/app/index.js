@@ -2,8 +2,9 @@ import express from "express";
 import session from 'express-session'
 import {fileURLToPath} from 'url';
 import {dirname, join} from 'path';
-import loginRoutes from './login.js';
 import mongoose from "mongoose";
+import loginRoutes from './login.js';
+import BearerRoutes from './routes/bearer-routes.js'
 const app = express();
 const port = 3009;
 //Static
@@ -16,11 +17,13 @@ app.use(session({
 	saveUninitialized: true,
 	secret: 'bla bla bla' 
 }))
-// Routing
+// Credentials
 app.use('/', loginRoutes)
 app.get('login', (req, res)=> {
 	res.sendFile('/login.html')
 })
+// Bearer Token
+app.use('/', BearerRoutes)
 //Server
 mongoose
 	.connect('mongodb://localhost:27017/test')
