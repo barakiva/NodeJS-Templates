@@ -8,7 +8,14 @@ passport.use(CredentialStrategy)
 //	Home
 const loginRoute = express.Router();
 loginRoute.post('/login', 
-	passport.authenticate('local', { failureRedirect: '/login' }),(req, res) => {
-		res.send('Passport authenticated!');
+	passport.authenticate('local', { failureRedirect: '/login.html' }),(req, res) => {
+		console.log(req.body)
+		res
+			.status(200)
+			.set({
+				'Content-type': 'application/json; charset=UTF-8',
+				'Accept': 'application/json'
+			})
+			.send({msg: 'authenticated'})
 	});
 export default loginRoute;

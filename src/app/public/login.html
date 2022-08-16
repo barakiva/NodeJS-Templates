@@ -21,14 +21,15 @@
 		const username = document.getElementById("username")
 		const password = document.getElementById("password")
 		const submitBtn = document.getElementById("submitBtn")
-
 		submitBtn.addEventListener("click", function(e) {
 			e.preventDefault();
+			console.log(username.value)
+			console.log(password.value)
 			postForm();
 		})
 		
 		function postForm() {
-			fetch('http://localhost:3009/authenticate', {
+			fetch('http://localhost:3009/login', {
 				method: 'POST',
 				body: JSON.stringify({
 					username: username.value,
@@ -36,6 +37,7 @@
 				}),
 				headers: {
 					'Content-type': 'application/json; charset=UTF-8',
+					'Accept': 'application/json'
 				},
 			})
 				.then((response) => response.json())

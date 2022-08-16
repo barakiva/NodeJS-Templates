@@ -18,6 +18,9 @@ app.use(session({
 }))
 // Routing
 app.use('/', loginRoutes)
+app.get('login', (req, res)=> {
+	res.sendFile('/login.html')
+})
 //Server
 mongoose
 	.connect('mongodb://localhost:27017/test')
