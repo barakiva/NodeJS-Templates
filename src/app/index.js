@@ -19,10 +19,6 @@ app.use(session({
 // Routing
 app.use('/', loginRoutes)
 //Server
-// app.listen(port, (req, res) => {
-// 		console.info(`Listening on port ${port}`)
-// })
-
 mongoose
 	.connect('mongodb://localhost:27017/test')
 	.then((res) => app.listen(port, ()=> console.info(`Listening on port ${port}`)))
