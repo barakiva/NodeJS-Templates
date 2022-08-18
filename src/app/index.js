@@ -8,7 +8,7 @@ import BearerRoutes from './routes/bearer-routes.js'
 import dotenv from 'dotenv'
 import passport from 'passport'
 import { resolveNaptr } from "dns";
-import './authentication/google-auth.js'
+import googleRouter from './routes/google-routes.js'
 //Config
 dotenv.config()
 const app = express();
@@ -35,29 +35,8 @@ app.get('login', (req, res)=> {
 })
 // Bearer Token
 app.use('/', BearerRoutes)
-// Google Login
-app.get('/auth/google',  // Choose an account to continue to AuthTest
-	passport.authenticate('google', { scope: ['email', 'profile']
-}))
-app.get('/auth/google/callaback',
-	passport.authenticate('google', {
-		successRedirect: '/protected',
-		failureRedirect: '/auth/google/failure'
-	}
-))
-// Protected routes
-function isLoggedIn(req, res, next) {
-	req.user ? next() : res.sendStatus(401)
-}
-app.get('/auth/google/failure', (req, res)=> {
-	res.send('Something went wrong')
-})
-app.get('/protected', isLoggedIn, (req, res)=> {
-	res.send("You're in!")
-})
-app.get('/google/callback', (req,res)=> {
-	res.send('Successful authentication!')
-})
+// Google
+app.use('/', googleRouter)
 //Server
 mongoose
 	.connect('mongodb://localhost:27017/test')

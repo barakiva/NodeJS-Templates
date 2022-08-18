@@ -7,14 +7,15 @@ dotenv.config()
 passport.use(new googleStrategy.Strategy({
 	clientID: process.env.GOOGLE_CLIENT_ID,
 	clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-	callbackURL: "http://localhost:5000/google/callback",
+	callbackURL: "http://localhost:5000/google/callback", // URL's Google SENDS authenticate requests
 	passReqToCallback: true
 	},
-	function(accessToken, refreshToken, profile, done) {
+	function(request, accessToken, refreshToken, profile, done) {
 		return done(null, profile)
 	}
 ))
-
+// function(request, accessToken, refreshToken, profile, done) {
+// 	return done(null, profile);
 passport.serializeUser(function(user,done){
 	done(null, user)
 })
