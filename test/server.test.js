@@ -1,12 +1,13 @@
 import request from 'supertest'
-import {app} from './index.js'
-
+import {app} from '../src/app/index.js'
+import chai from 'chai';
+const assert = chai.assert;
 describe('GET /hello', function() {
 	it('responds with Hello', async function() {
 		const response = await request(app)
 			.get('/hello')
-		expect(response.status).toEqual(200);
-		expect(response.body.msg).toEqual('Hello');
+		assert.equal(response.status, 200);
+		assert.equal(response.body.msg, 'Hello');
 	});
 });
 
