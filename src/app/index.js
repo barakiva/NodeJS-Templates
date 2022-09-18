@@ -1,7 +1,11 @@
 import express from "express";
 
 import helper from "./helper.js";
-
+import {typesOf, instances} from './types.js'
+// Types experiments
+typesOf()
+console.log('*----------*')
+instances()
 const app = express();
 let port;
 await helper.findFreePort.then((res)=> port = res)
