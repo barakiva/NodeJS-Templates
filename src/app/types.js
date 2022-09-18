@@ -46,12 +46,11 @@ export function instances() {
     console.log(typeof 'example string' === 'string') // true
     console.log(typeof true === 'boolean') // true
     console.log(typeof 5 === 'number') // true
-    console.info("And the wrong way")
     // Wrong way
+    console.info("And the wrong way")
     console.log(str instanceof String) // false
     console.log(true instanceof Boolean) // false
     console.log(42 instanceof Number) // false
-
     // Checking primitives VS their respective wrappers
     console.info('Checking primitives VS their respective wrappers')
     console.log(true instanceof Boolean)
@@ -61,4 +60,18 @@ export function instances() {
     console.log("hey" instanceof String)
     console.log(new String("hey") instanceof String)
 
+}
+function classOf(value) {
+    return Object.prototype.toString.call(value).slice(8, -1);
+}
+function isString(s) {
+    return typeof(s) === 'string' || s instanceof String;
+}
+export function betterWay() {
+    console.log(classOf(true));              // [object Boolean]
+    console.log(classOf(0));                 // [object Number]
+    console.log(classOf(""));                // [object String]
+    console.log(classOf(new Boolean(true))); // [object Boolean]
+    console.log(classOf(new Number(0)));     // [object Number]
+    console.log(classOf(new String("")));    // [object String]
 }
