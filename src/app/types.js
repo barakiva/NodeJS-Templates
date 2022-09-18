@@ -43,7 +43,7 @@ export function primitiveInstances() {
 export function instances() {
     // Correct way to check for primitive types
     console.info(" Correct way to check for primitive types")
-    console.log(typeof 'example string' === 'string') // true
+    console.log(typeof 'example string' === 'string' || 'example string' instanceof new String('example string')) // true
     console.log(typeof true === 'boolean') // true
     console.log(typeof 5 === 'number') // true
     // Wrong way
@@ -59,7 +59,9 @@ export function instances() {
     console.log(new Number(0) instanceof Number)
     console.log("hey" instanceof String)
     console.log(new String("hey") instanceof String)
-
+    // Checking for null
+    console.log("Checking for null") // Cause null is also an object (reference for an empty object)
+    console.log(typeof obj === 'object' && obj !== null)
 }
 function classOf(value) {
     return Object.prototype.toString.call(value).slice(8, -1);
